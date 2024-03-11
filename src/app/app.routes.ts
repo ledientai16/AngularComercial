@@ -6,6 +6,5 @@ export const routes: Routes = [
     {path: 'category/:id', component: ProductListComponent},
     {path: 'category', component: ProductListComponent},
     {path: 'product', component: ProductListComponent},
-    {path: '', redirectTo: '/products', pathMatch: 'full'},
-    {path: '**', redirectTo: '/products', pathMatch: 'full'}
+    {path: 'search/:keyword', component: ProductListComponent}, 
 ];
