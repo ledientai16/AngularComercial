@@ -19,16 +19,16 @@ export class ProductCategoryMenuComponent {
   constructor(private productService : ProductService) { 
   }
   
-  ngOnit(){
+  ngOnInit(){
     this.listProductCategory();
   }
 
   listProductCategory() {
     this.productService.getProductCategories().subscribe(
-      (data) => {
+      data => {
         console.log('product category: ' + JSON.stringify(data));
         this.productCategories = data;
       }
     )
   }
-}
+} 
