@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../product';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute, RouterModule} from '@angular/router';
+import {ActivatedRoute, RouterModule, RouterOutlet} from '@angular/router';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css'
 })
