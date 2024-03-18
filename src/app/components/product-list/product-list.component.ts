@@ -2,13 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../product';
 import { CommonModule } from '@angular/common';
-import {ActivatedRoute, RouterModule} from '@angular/router';
+import {ActivatedRoute, RouterModule, RouterOutlet} from '@angular/router';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [CommonModule, NgbPaginationModule],
+  imports: [CommonModule, NgbPaginationModule, RouterModule], 
   templateUrl: './product-list-grid.component.html',
   styleUrl: './product-list.component.css'
 })

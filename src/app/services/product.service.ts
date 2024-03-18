@@ -31,7 +31,7 @@ export class ProductService {
       map(response => response._embedded.products)
     );
   }
-
+ 
   getProductListPaginate(thePage : number,
                           thePageSize : number,
                           theCategoryId : number) : Observable<GetResponeProduct> {
@@ -46,6 +46,11 @@ export class ProductService {
                         theName: String) : Observable<GetResponeProduct> {
     let searchUrl = `${this.basUrl}/search/findByNameContaining?name=${theName}&page=${thePage}&size=${thePageSize}` 
     return this.httpClient.get<GetResponeProduct>(searchUrl);
+                        }
+  getProductById(productId : number) : Observable<Product> {
+    let searchUrl = `${this.basUrl}/${productId}` 
+    
+    return this.httpClient.get<Product>(searchUrl);  
   }
 }
 
