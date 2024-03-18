@@ -31,11 +31,33 @@ export class ProductService {
       map(response => response._embedded.products)
     );
   }
+
+  getProductListPaginate(thePage : number,
+                          thePageSize : number,
+                          theCategoryId : number) : Observable<GetResponeProduct> {
+    const url = `${this.basUrl}/search/findByCategoryId`
+      + `?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`;
+
+    return this.httpClient.get<GetResponeProduct>(url);
+  }
+
+  searchProductPaginate(thePage: number,
+                        thePageSize: number,
+                        theName: String) : Observable<GetResponeProduct> {
+    let searchUrl = `${this.basUrl}/search/findByNameContaining?name=${theName}&page=${thePage}&size=${thePageSize}` 
+    return this.httpClient.get<GetResponeProduct>(searchUrl);
+  }
 }
 
 interface GetResponeProduct {
   _embedded : {
     products : Product[ ]
+  }, 
+  page: {
+    size : number,
+    totalElements: number,
+    totalPages: number,
+    number: number,
   }
 }
 

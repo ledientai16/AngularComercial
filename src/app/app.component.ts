@@ -5,7 +5,7 @@ import { SearchComponent } from './components/search/search.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ProductService} from './services/product.service';
 import {  RouterOutlet,RouterModule} from '@angular/router';  
- 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 @Component({
     selector: 'app-root',
     standalone: true,
@@ -19,6 +19,7 @@ import {  RouterOutlet,RouterModule} from '@angular/router';
         ProductCategoryMenuComponent,
         HttpClientModule,
         SearchComponent,
+        NgbModule,
     ]
 })  
 export class AppComponent {
