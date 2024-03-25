@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { ProductService } from '../../services/product.service';
 import {ActivatedRoute, Route, RouterModule, RouterOutlet} from '@angular/router';
 import { Product } from '../../product';
+import { CartService } from '../../services/cart.service';
+import { CartItem } from '../../cart-item';
 @Component({
   selector: 'app-product-details',
   standalone: true,
@@ -10,9 +12,10 @@ import { Product } from '../../product';
   styleUrl: './product-details.component.css'
 })
 export class ProductDetailsComponent {
-  product : Product | undefined ;
+  product: Product | undefined;
 
   constructor(private productService : ProductService,
+    private cartService: CartService,
     private route: ActivatedRoute) {
 
   }
@@ -32,5 +35,12 @@ export class ProductDetailsComponent {
         this.product = data
       }
     )
+  }
+
+  addToCart() {
+    if (this.product != undefined) {
+      const theCartItem: CartItem = new CartItem(this.product); 
+      this.cartService.addToCart(theCartItem);
+    } 
   }
 }

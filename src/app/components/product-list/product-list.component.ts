@@ -4,6 +4,8 @@ import { Product } from '../../product';
 import { CommonModule } from '@angular/common';
 import {ActivatedRoute, RouterModule, RouterOutlet} from '@angular/router';
 import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartItem } from '../../cart-item';
+import { CartService } from '../../services/cart.service';
 
 @Component({
   selector: 'app-product-list',
@@ -14,20 +16,18 @@ import { NgbPaginationModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap'
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  currentCategoryId: number = 0;
-  
-  searchMode: Boolean = false;
-
+  currentCategoryId: number = 0; 
+  searchMode: Boolean = false; 
   thePageNumber: number = 1;
   thePageSize: number = 5;
   theTotalElement: number = 0;
   previousCategoryId: number = 1;
-  page: any;
-
+  page: any; 
   theKeyWord: string = '';
   thePreviousKeyWord : String = '';
   constructor(private productService : ProductService,
-              private route: ActivatedRoute) { 
+              private route: ActivatedRoute,
+              private cartService: CartService) { 
   }
 
   ngOnInit(): void {
@@ -107,5 +107,13 @@ export class ProductListComponent implements OnInit {
       this.thePageSize = data.page.size;
       this.theTotalElement = data.page.totalElements;
     };
+  }
+
+  addToCard(theProduct: Product) {
+    console.log('add to cart')
+    console.log(`adding to card ${theProduct.name}, ${theProduct.unitPrice}`);
+
+    const theCartItem = new CartItem(theProduct);
+    this.cartService.addToCart(theCartItem);
   }
 }

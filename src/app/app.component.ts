@@ -2,6 +2,7 @@ import { Component, NgModule, importProvidersFrom } from '@angular/core';
 import { ProductListComponent } from './components/product-list/product-list.component';
 import { ProductCategoryMenuComponent } from './components/product-category-menu/product-category-menu.component';
 import { SearchComponent } from './components/search/search.component';
+import {  CartStatusComponent} from './components/cart-status/cart-status.component';
 import { HttpClientModule} from '@angular/common/http';
 import { ProductService} from './services/product.service';
 import {  RouterOutlet,RouterModule} from '@angular/router';  
@@ -20,6 +21,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
         HttpClientModule,
         SearchComponent,
         NgbModule,
+        CartStatusComponent,
     ]
 })  
 export class AppComponent {
