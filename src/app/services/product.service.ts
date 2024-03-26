@@ -36,8 +36,7 @@ export class ProductService {
                           thePageSize : number,
                           theCategoryId : number) : Observable<GetResponeProduct> {
     const url = `${this.basUrl}/search/findByCategoryId`
-      + `?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`;
-
+      + `?id=${theCategoryId}&page=${thePage}&size=${thePageSize}`; 
     return this.httpClient.get<GetResponeProduct>(url);
   }
 
