@@ -15,7 +15,7 @@ export class CartService {
     let existingCartItem : CartItem | undefined;
     
     if (this.cartItems.length > 0) { 
-      existingCartItem = this.cartItems.find(element => element.id === theCartItem.id)
+      existingCartItem = this.cartItems.find(element => element.id == theCartItem.id)
     } 
     if (existingCartItem != undefined) {
       existingCartItem.quantity++;
