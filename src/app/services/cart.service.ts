@@ -21,11 +21,30 @@ export class CartService {
       existingCartItem.quantity++;
     } else {
       this.cartItems.push(theCartItem);
-    }
-    
+    } 
     this.computeCartTotal();
   }
+  decrementQuantity(theCartItem: CartItem) {
+    theCartItem.quantity--;
 
+    if (theCartItem.quantity == 0) {
+      this.remove(theCartItem);
+    } else {
+      this.computeCartTotal();
+    }
+
+    this.computeCartTotal(); 
+  }
+
+  remove(theCartItem: CartItem) {
+    const itemIndex = this.cartItems.findIndex(
+      tempCartItem => theCartItem.id == tempCartItem.id
+    );
+
+    if (itemIndex > -1) {
+      this.cartItems.splice(itemIndex, 1);
+    }
+  } 
   computeCartTotal () {
     let totalQuantityValue : number = 0;
     let totalPriceValue : number = 0;

@@ -21,11 +21,15 @@
                             </td>
                             <td>
                                 <p>
-                                    <!-- <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                    
+                                    quantity:
+                                    <button (click)="incrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
                                         <i class="fas fa-plus"></i>
-                                    </button> -->
-                                    quantity: {{ tempCartItem.quantity }}
-                                    < 
+                                    </button> 
+                                    {{ tempCartItem.quantity }}
+                                    <button (click)="decrementQuantity(tempCartItem)" class="btn btn-primary btn-sm">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
                                 </p> 
                                 <p>Subtotal: {{ tempCartItem.quantity * tempCartItem.unitPrice | currency: 'USD' }}</p>  
                             </td>
