@@ -1,13 +1,17 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { first } from 'rxjs';
 import { MyShopFormService } from '../../services/my-shop-form.service';
+import { Country } from '../../country';
+import { RouterModule, RouterOutlet } from '@angular/router';
+import { State } from '../../state';
 
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,
+    RouterOutlet,
+    RouterModule],
   templateUrl: './checkout.component.html',
   styleUrl: './checkout.component.css'
 })
@@ -17,11 +21,15 @@ export class CheckoutComponent implements OnInit {
   totalQuantity: number = 0;
   creditCardMonths: number[] = [];
   creditCardYears: number[] = [];
+  countries: Country[] = [];
+  shippingState: State[] = [];
   constructor(private formBuilder: FormBuilder,
     private myShopService: MyShopFormService
   ) { }
 
   ngOnInit(): void {
+    // get Countries data
+    this.listCountry();
     //get list credit month and year
     let currentMonth = new Date().getMonth() + 1;
     this.myShopService.getCreditCardMonths(currentMonth).subscribe(
@@ -65,6 +73,15 @@ export class CheckoutComponent implements OnInit {
       }),
     })
   }
+  listCountry() {
+    this.myShopService.getCountries().subscribe(
+      data => {
+        console.log('countries: ' + JSON.stringify(data));
+        this.countries = data;
+        console.log('this.countries ' + JSON.stringify(this.countries));
+      }
+    )
+  }
   onSubmit() {
     console.log("handling a submit button");
     console.log(this.checkoutFormGroup?.get('customer')?.value);
@@ -91,5 +108,18 @@ export class CheckoutComponent implements OnInit {
         this.creditCardMonths = data
       }
     )
+  }
+
+  handleChangeCountry(formName: string) {
+    const form = this.checkoutFormGroup.get(formName);
+
+    if (formName == 'shippingAddress') {
+      this.myShopService.getStateByCode(form?.value.country.code).subscribe(
+        data => {
+          this.shippingState = data;
+          console.log('this.shippingState: ' + JSON.stringify(this.shippingState));
+        }
+      );
+    }
   }
 }
